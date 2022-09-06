@@ -28,9 +28,9 @@ public class Vegetables {
         return this.calories;
     }
 
-    public void swapColor(Vegetables veg2) {
-        String hello = this.color;
-        this.color = veg2.color;
+    public static void swapColor(Vegetables veg1, Vegetables veg2) {
+        String hello = veg1.color;
+        veg1.color = veg2.color;
         veg2.color = hello;
     }
 
@@ -43,7 +43,7 @@ public class Vegetables {
         Vegetables veg2 = new Vegetables("Carrot", "orange", 50);
         System.out.println(veg1.toString());
         System.out.println(veg2.toString());
-        veg1.swapColor(veg2);
+        swapColor(veg1, veg2);
         System.out.println(veg1.toString());
         System.out.println(veg2.toString());
     }
