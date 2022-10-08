@@ -26,27 +26,6 @@ public class Percolation {
       if (row == grid.length - 1) {
           grid[row][col].setConnectedToOpenBottom(true);
       }
-
-      if (row > 0 && grid[row - 1][col].getOpen()) {
-          grid[row][col].setConnectedToOpenTop(grid[row - 1][col].getConnectedToOpenTop());
-          grid[row - 1][col].setConnectedToOpenBottom(grid[row][col].getConnectedToOpenBottom());
-      }
-
-      if (row < grid.length - 1 && grid[row + 1][col].getOpen()) {
-          grid[row][col].setConnectedToOpenBottom(grid[row + 1][col].getConnectedToOpenBottom());
-          grid[row + 1][col].setConnectedToOpenTop(grid[row][col].getConnectedToOpenTop());
-      }
-
-      if (col > 0 && grid[row][col - 1].getOpen()) {
-          grid[row][col].setConnectedToOpenTop(grid[row][col - 1].getConnectedToOpenTop());
-          grid[row][col - 1].setConnectedToOpenBottom(grid[row][col].getConnectedToOpenBottom());
-      }
-
-      if (col < grid.length - 1 && grid[row][col + 1].getOpen()) {
-          grid[row][col].setConnectedToOpenBottom(grid[row][col + 1].getConnectedToOpenBottom());
-          grid[row][col + 1].setConnectedToOpenTop(grid[row][col].getConnectedToOpenTop());
-      }
-
       //union with top and bottom and right and left
 
       if (!grid[row][col + 1].getOpen()) {
