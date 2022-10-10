@@ -6,11 +6,16 @@ public class Percolation {
 
   // creates n-by-n grid, with all sites initially blocked
   public Percolation(int n) {
-      for (int i = 0; i < n; i++) {
-          for (int j = 0; j < n; j++) {
-              grid[i][j] = new Site(i, j);
-          }
+    if (n <= 0) {
+      throw new IllegalArgumentException("n must be greater than 0");
+    }
+    numsitesopen = 0;
+    grid = new Site[n][n];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        grid[i][j] = new Site(i + 1, j + 1);
       }
+    }
   }
   // opens the site (row, col) if it is not open already
   public void open(int row, int col) {
@@ -66,8 +71,7 @@ public class Percolation {
       return grid[row][col];
   }
 
-  //weighted quick union
-  //link root of smaller tree to root of larger tree
+
   public void Union(Site p, Site q) {
       Site i = root(p.getRow(), p.getCol());
       Site j = root(q.getRow(), q.getCol());
