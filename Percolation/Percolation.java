@@ -19,54 +19,48 @@ public class Percolation {
     }
     // opens the site (row, col) if it is not open already
     public void open(int row, int col) {
-        if (!grid[row][col].getOpen()) {
-            grid[row][col].setOpen(true);
-            numsitesopen++;
+        grid[row - 1][col - 1].setOpen(true);
+        numsitesopen++;
+        if (row == 1) {
+            grid[row - 1][col - 1].setConnectedToOpenTop(true);
         }
-        System.out.println("a");
-        if (row == 0) {
-            grid[row][col].setConnectedToOpenTop(true);
+        if (row == grid.length) {
+            grid[row - 1][col - 1].setConnectedToOpenBottom(true);
         }
-
-        if (row == grid.length - 1) {
-            grid[row][col].setConnectedToOpenBottom(true);
-        }
-        //union with top and bottom and right and left
-        System.out.println("c");
-        if (grid[row][col + 1].getOpen()) {
-            System.out.println("d");
-            Union(grid[row][col], grid[row][col + 1]);
-        }
-
-        if (grid[row][col - 1].getOpen()) {
-            System.out.println("e");
-            Union(grid[row][col], grid[row][col - 1]);
-        }   
-
-        if (grid[row + 1][col].getOpen()) {
-            System.out.println("f");
-            Union(grid[row][col], grid[row + 1][col]);
-        }
-
-        if (grid[row - 1][col].getOpen()) {
-            System.out.println("g");
+        if (row > 1 && grid[row - 1][col].getOpen()) {
             Union(grid[row][col], grid[row - 1][col]);
+            System.out.println("a");
+        }
+
+        if (row < grid.length && grid[row + 1][col].getOpen()) {
+            Union(grid[row][col], grid[row + 1][col]);
+            System.out.println("b");
+        }
+
+        if (col > 1 && grid[row][col - 1].getOpen()) {
+            Union(grid[row][col], grid[row][col - 1]);
+            System.out.println("c");
+        }
+
+        if (col < grid.length && grid[row][col + 1].getOpen()) {
+            Union(grid[row][col], grid[row][col + 1]);
+            System.out.println("d");
         }
 
     }
     // is the site (row, col) open?
     public boolean isOpen(int row, int col) {
-        return grid[row][col].getOpen();
+        return grid[row - 1][col - 1].getOpen();
     }
     // is the site (row, col) full?
     public boolean isFull(int row, int col) {
-        return grid[row][col].getfull();
+        return grid[row - 1][col - 1].getfull();
     }
     // returns the number of open sites
     public int numberOfOpenSites() {
         return numsitesopen;
-    }
 
+    }
 
     public Site root(Site site) {
         while (site.getRow() != site.getCol()) {
