@@ -65,26 +65,30 @@ public class Percolation {
 
     public Site root(int row, int col) {
         while (!grid[row][col].getConnectedToOpenTop()) {
+            grid[row][col].incrementSize(1);
             row = grid[row][col].getRow();
             col = grid[row][col].getCol();
         }
         return grid[row][col];
     }
 
-//make a weighted quick union
+    //make a weighted quick union
     public void Union(Site p, Site q) {
         Site i = root(p.getRow(), p.getCol());
         Site j = root(q.getRow(), q.getCol());
         if (i == j) {
             return;
         }
-        if (i.getConnectedToOpenBottom() && j.getConnectedToOpenBottom()) {
-            i.setConnectedToOpenBottom(true);
-            j.setConnectedToOpenBottom(true);
-        }
-        if (i.getConnectedToOpenTop() && j.getConnectedToOpenTop()) {
+        if (i.getSize() < j.getSize()) {
             i.setConnectedToOpenTop(true);
+            i.setConnectedToOpenBottom(j.getConnectedToOpenBottom());
+            i.setfull(j.getfull());
+            i.incrementSize(j.getSize());
+        } else {
             j.setConnectedToOpenTop(true);
+            j.setConnectedToOpenBottom(i.getConnectedToOpenBottom());
+            j.setfull(i.getfull());
+            j.incrementSize(i.getSize());
         }
     }
 

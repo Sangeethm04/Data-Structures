@@ -6,7 +6,7 @@ class Main {
     Scanner scanner = new Scanner(new File("testOrder1.rtf"));
     int dim = scanner.nextInt();
 
-    Percolation grid = new Percolation (dim);
+    Percolation grid = new Percolation(dim);
     System.out.println(dim);
 
     int row = 0;
@@ -16,7 +16,7 @@ class Main {
       if (scanner.hasNextInt()) {
         col = scanner.nextInt();
         System.out.println(row + "  " + col);
-          grid.open(row,col); 
+        grid.open(row, col);
       }
     }
     // grid.printGrid();
