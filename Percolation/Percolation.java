@@ -7,13 +7,13 @@ public class Percolation {
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
         if (n <= 0) {
-            throw new IllegalArgumentException("n must be greater than 0");
+            throw new IllegalArgumentException("n 0");
         }
         numsitesopen = 0;
         grid = new Site[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                grid[i][j] = new Site(i + 1, j + 1);
+                grid[i][j] = new Site(i, j);
             }
         }
     }
@@ -23,7 +23,7 @@ public class Percolation {
             grid[row][col].setOpen(true);
             numsitesopen++;
         }
-
+        System.out.println("a");
         if (row == 0) {
             grid[row][col].setConnectedToOpenTop(true);
         }
@@ -32,20 +32,24 @@ public class Percolation {
             grid[row][col].setConnectedToOpenBottom(true);
         }
         //union with top and bottom and right and left
-
-        if (!grid[row][col + 1].getOpen()) {
+        System.out.println("c");
+        if (grid[row][col + 1].getOpen()) {
+            System.out.println("d");
             Union(grid[row][col], grid[row][col + 1]);
         }
 
-        if (!grid[row][col - 1].getOpen()) {
+        if (grid[row][col - 1].getOpen()) {
+            System.out.println("e");
             Union(grid[row][col], grid[row][col - 1]);
-        }
+        }   
 
-        if (!grid[row + 1][col].getOpen()) {
+        if (grid[row + 1][col].getOpen()) {
+            System.out.println("f");
             Union(grid[row][col], grid[row + 1][col]);
         }
 
-        if (!grid[row - 1][col].getOpen()) {
+        if (grid[row - 1][col].getOpen()) {
+            System.out.println("g");
             Union(grid[row][col], grid[row - 1][col]);
         }
 
@@ -63,32 +67,32 @@ public class Percolation {
         return numsitesopen;
     }
 
-    public Site root(int row, int col) {
-        while (!grid[row][col].getConnectedToOpenTop()) {
-            grid[row][col].incrementSize(1);
-            row = grid[row][col].getRow();
-            col = grid[row][col].getCol();
+
+    public Site root(Site site) {
+        while (site.getRow() != site.getCol()) {
+            site = grid[site.getRow() - 1][site.getCol() - 1];
         }
-        return grid[row][col];
+        return site;
     }
 
     //make a weighted quick union
     public void Union(Site p, Site q) {
-        Site i = root(p.getRow(), p.getCol());
-        Site j = root(q.getRow(), q.getCol());
-        if (i == j) {
-            return;
-        }
-        if (i.getSize() < j.getSize()) {
-            i.setConnectedToOpenTop(true);
-            i.setConnectedToOpenBottom(j.getConnectedToOpenBottom());
-            i.setfull(j.getfull());
-            i.incrementSize(j.getSize());
+        Site rootP = root(p);
+        Site rootQ = root(q);
+        if (rootP.getSize() < rootQ.getSize()) {
+            rootP.incrementSize(rootQ.getSize());
+            rootQ.incrementSize(rootP.getSize());
+            rootP.setfull(true);
+            rootQ.setfull(true);
+            rootP.setConnectedToOpenBottom(rootQ.getConnectedToOpenBottom());
+            rootP.setConnectedToOpenTop(rootQ.getConnectedToOpenTop());
         } else {
-            j.setConnectedToOpenTop(true);
-            j.setConnectedToOpenBottom(i.getConnectedToOpenBottom());
-            j.setfull(i.getfull());
-            j.incrementSize(i.getSize());
+            rootP.incrementSize(rootQ.getSize());
+            rootQ.incrementSize(rootP.getSize());
+            rootP.setfull(true);
+            rootQ.setfull(true);
+            rootP.setConnectedToOpenBottom(rootQ.getConnectedToOpenBottom());
+            rootP.setConnectedToOpenTop(rootQ.getConnectedToOpenTop());
         }
     }
 

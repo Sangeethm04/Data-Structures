@@ -10,9 +10,13 @@ public class Site {
 
 
     public Site(int row, int col) {
-        this.row = row - 1;
-        this.col = col - 1;
+        this.row = row;
+        this.col = col;
+        this.size = 1;
+        this.full = false;
         this.open = false;
+        this.connectedToOpenBottom = false;
+        this.getConnectedToOpenTop = false;
     }
     public int getRow() {
         return row;
