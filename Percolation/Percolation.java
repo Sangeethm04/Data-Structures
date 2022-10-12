@@ -1,10 +1,11 @@
+//almost working but not quite getting the indexing right
 public class Percolation {
 
     // number of open sites
     private int numsitesopen;
     private Site[][] grid;
 
-    // creates n-by-n grid, with all sites initially blocked
+    // creates n-by-n grid, with all sites initially blocked using correct relative index
     public Percolation(int n) {
         if (n <= 0) {
             throw new IllegalArgumentException("n 0");
@@ -87,6 +88,15 @@ public class Percolation {
             rootQ.setfull(true);
             rootP.setConnectedToOpenBottom(rootQ.getConnectedToOpenBottom());
             rootP.setConnectedToOpenTop(rootQ.getConnectedToOpenTop());
+        }
+    }
+
+    public void printGrid() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid.length; j++) {
+                System.out.print(grid[i][j].getOpen() + " ");
+            }
+            System.out.println();
         }
     }
 

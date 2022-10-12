@@ -3,10 +3,10 @@ import java.io.*;
 class Main {
   public static void main(String[] args) throws FileNotFoundException {
 
-    Scanner scanner = new Scanner(new File("testColLimits.rtf"));
+    Scanner scanner = new Scanner(new File("testOrder1.rtf"));
     int dim = scanner.nextInt();
  
-    Percolation grid = new Percolation(dim);
+    Percolation grid = new Percolation(dim+2);
     System.out.println(dim);
 
     int row = 0;
@@ -19,7 +19,7 @@ class Main {
         grid.open(row, col);
       }
     }
-    // grid.printGrid();
+    grid.printGrid();
     if (grid.percolates()) {
       System.out.println("This grid percolates");
     } else {
