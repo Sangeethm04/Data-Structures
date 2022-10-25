@@ -12,14 +12,12 @@ public class Main {
         s.push("a");
         s.push("little");
         s.push("lamb");
-       for(String s2: s) {
-        System.out.println(s2);
-       }
-       remove(s, "lamb");
-       for(String s2: s) {
-        System.out.println(s2);
-       }
+        for (String s2: s) {
+            System.out.println(s2);
+        }
+        remove(s, "lamb");
+        for (String s2: s) {
+            System.out.println(s2);
+        }
     }
-
-
 }
