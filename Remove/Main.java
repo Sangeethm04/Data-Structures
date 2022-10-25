@@ -12,17 +12,14 @@ public class Main {
         s.push("a");
         s.push("little");
         s.push("lamb");
-        while (!s.isEmpty()) {
-            System.out.println(s.pop());
-        }
-        remove(s, "a");
-        while (!s.isEmpty()) {
-            System.out.println(s.pop());
-        }
-
-
+       for(String s2: s) {
+        System.out.println(s2);
+       }
+       remove(s, "lamb");
+       for(String s2: s) {
+        System.out.println(s2);
+       }
     }
 
-    //create an iterator for the linked list
 
 }
