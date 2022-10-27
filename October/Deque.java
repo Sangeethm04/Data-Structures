@@ -1,4 +1,6 @@
 package October;
+import java.util.Iterator;
+
 public class Deque < Item > implements Iterable < Item > {
     private Node first;
     private Node last;
@@ -17,6 +19,7 @@ public class Deque < Item > implements Iterable < Item > {
         size = 0;
     }
 
+    // return an iterator over items in order from front to back
     public Iterator < Item > iterator() {
         return new ListIterator();
     }
@@ -35,14 +38,14 @@ public class Deque < Item > implements Iterable < Item > {
             return item;
         }
 
-        public remove() }{
-
+        public void remove() {
+            
         }
     }
 
     // is the deque empty?
     public boolean isEmpty() {
-
+        return size == 0;
     }
 
     // return the number of items on the deque
@@ -60,27 +63,36 @@ public class Deque < Item > implements Iterable < Item > {
 
     // add the item to the back
     public void addLast(Item item) {
-        if(size == 0) {
-            first = newNode();
-            
-
-        }
+        Node oldlast = last;
+        last = new Node();
+        last.item = item;
+        last.previous = oldlast;
     }
 
     // remove and return the item from the front
     public Item removeFirst() {
-        
+        Item item = first.item;
+        first = first.next;
+        return item;    
     }
 
     // remove and return the item from the back
     public Item removeLast() {
-
+        Item item = last.item;
+        last = last.previous;
+        return item;
     }
 
-    // return an iterator over items in order from front to back
 
     // unit testing (required)
     public static void main(String[] args) {
+        Deque < Integer > deque = new Deque < Integer > ();
+        deque.addFirst(1);
+        deque.addFirst(2);
 
+        //print out the deque
+        for (Integer i: deque) {
+            System.out.println(i);
+        }
     }
 }
