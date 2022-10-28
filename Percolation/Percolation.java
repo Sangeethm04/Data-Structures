@@ -10,6 +10,7 @@ public class Percolation {
         if (n <= 0) {
             throw new IllegalArgumentException("n 0");
         }
+        System.out.println("n: " + n);
         numsitesopen = 0;
         grid = new Site[n][n];
         for (int i = 0; i < n; i++) {
@@ -20,32 +21,41 @@ public class Percolation {
     }
     // opens the site (row, col) if it is not open already
     public void open(int row, int col) {
-        grid[row - 1][col - 1].setOpen(true);
+        //row and col are real numbers, not the index
+        int rowIndex = row - 1;
+        int colIndex = col - 1;
+        System.out.println(" opening :" + row + " " + col);
+        grid[rowIndex][colIndex].setOpen(true);
         numsitesopen++;
         if (row == 1) {
-            grid[row - 1][col - 1].setConnectedToOpenTop(true);
+            grid[rowIndex][colIndex].setConnectedToOpenTop(true);
         }
         if (row == grid.length) {
-            grid[row - 1][col - 1].setConnectedToOpenBottom(true);
+            grid[rowIndex][colIndex].setConnectedToOpenBottom(true);
         }
-        if (row > 1 && grid[row - 1][col].getOpen()) {
-            Union(grid[row][col], grid[row - 1][col]);
+        //look up
+        if (row > 1 && grid[rowIndex - 1][colIndex].getOpen()) {
+            System.out.println("a");
+            Union(grid[rowIndex][colIndex], grid[rowIndex - 1][colIndex]);
             System.out.println("a");
         }
-
-        if (row < grid.length && grid[row + 1][col].getOpen()) {
-            Union(grid[row][col], grid[row + 1][col]);
+        //look down
+        if (row < grid.length && grid[rowIndex + 1][colIndex].getOpen()) {
             System.out.println("b");
-        }
+            Union(grid[rowIndex][colIndex], grid[rowIndex + 1][colIndex]);
 
-        if (col > 1 && grid[row][col - 1].getOpen()) {
-            Union(grid[row][col], grid[row][col - 1]);
+        }
+        //look left
+        if (col > 1 && grid[rowIndex][colIndex - 1].getOpen()) {
             System.out.println("c");
-        }
+            Union(grid[rowIndex][colIndex], grid[rowIndex][colIndex - 1]);
 
-        if (col < grid.length && grid[row][col + 1].getOpen()) {
-            Union(grid[row][col], grid[row][col + 1]);
+        }
+        //look right
+        if (col < grid.length && grid[rowIndex][colIndex + 1].getOpen()) {
             System.out.println("d");
+            Union(grid[rowIndex][colIndex], grid[rowIndex][colIndex + 1]);
+
         }
 
     }
@@ -64,8 +74,8 @@ public class Percolation {
     }
 
     public Site root(Site site) {
-        while (site.getRow() != site.getCol()) {
-            site = grid[site.getRow() - 1][site.getCol() - 1];
+        while(site.getRow() != site.getRow() | site.getCol() != site.getCol()) {
+            site = grid[site.getRow()][site.getCol()];
         }
         return site;
     }
@@ -92,6 +102,7 @@ public class Percolation {
     }
 
     public void printGrid() {
+        System.out.println("grid length: " + grid.length);
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid.length; j++) {
                 System.out.print(grid[i][j].getOpen() + " ");
