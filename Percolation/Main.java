@@ -3,7 +3,7 @@ import java.io.*;
 class Main {
   public static void main(String[] args) throws FileNotFoundException {
 
-    Scanner scanner = new Scanner(new File("testOrder1.rtf"));
+    Scanner scanner = new Scanner(new File("testColLimits.rtf"));
     int dim = scanner.nextInt();
 
     Percolation grid = new Percolation(dim);

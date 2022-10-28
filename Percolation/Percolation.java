@@ -35,25 +35,20 @@ public class Percolation {
         }
         //look up
         if (row > 1 && grid[rowIndex - 1][colIndex].getOpen()) {
-            System.out.println("a");
             Union(grid[rowIndex][colIndex], grid[rowIndex - 1][colIndex]);
-            System.out.println("a");
         }
         //look down
         if (row < grid.length && grid[rowIndex + 1][colIndex].getOpen()) {
-            System.out.println("b");
             Union(grid[rowIndex][colIndex], grid[rowIndex + 1][colIndex]);
 
         }
         //look left
         if (col > 1 && grid[rowIndex][colIndex - 1].getOpen()) {
-            System.out.println("c");
             Union(grid[rowIndex][colIndex], grid[rowIndex][colIndex - 1]);
 
         }
         //look right
         if (col < grid.length && grid[rowIndex][colIndex + 1].getOpen()) {
-            System.out.println("d");
             Union(grid[rowIndex][colIndex], grid[rowIndex][colIndex + 1]);
 
         }
@@ -115,7 +110,7 @@ public class Percolation {
     public boolean percolates() {
         for (int i = 0; i < grid.length; i++) {
             System.out.println("i: " + i);
-                if(!grid[0][i].getConnectedToOpenBottom()){
+                if(!grid[i][0].getOpen()){
                     return false;
             }
     } 
