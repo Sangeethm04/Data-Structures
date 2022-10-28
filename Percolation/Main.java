@@ -5,7 +5,7 @@ class Main {
 
     Scanner scanner = new Scanner(new File("testOrder1.rtf"));
     int dim = scanner.nextInt();
- 
+
     Percolation grid = new Percolation(dim);
     System.out.println(dim);
 
@@ -25,7 +25,7 @@ class Main {
     } else {
 
       System.out.println("This grid does not percolate");
-      //System.out.println("Number of Open Sites: " + grid.getNumSites());
+      System.out.println("Number of Open Sites: " + grid.numberOfOpenSites());
     }
   }
 }

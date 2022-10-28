@@ -74,7 +74,7 @@ public class Percolation {
     }
 
     public Site root(Site site) {
-        while(site.getRow() != site.getRow() | site.getCol() != site.getCol()) {
+        while (site.getRow() != site.getRow() | site.getCol() != site.getCol()) {
             site = grid[site.getRow()][site.getCol()];
         }
         return site;
@@ -114,12 +114,13 @@ public class Percolation {
     // does the system percolate?
     public boolean percolates() {
         for (int i = 0; i < grid.length; i++) {
-            if (grid[grid.length - 1][i].getConnectedToOpenTop()) {
-                return true;
+            System.out.println("i: " + i);
+                if(!grid[0][i].getConnectedToOpenBottom()){
+                    return false;
             }
-        }
-        return false;
-    }
+    } 
+    return true;
+}
     // test client 
     public static void main(String[] args) {
 
