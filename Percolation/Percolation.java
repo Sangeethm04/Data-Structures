@@ -1,4 +1,3 @@
-//almost working but not quite getting the indexing right
 public class Percolation {
 
     // number of open sites
@@ -24,7 +23,7 @@ public class Percolation {
         //row and col are real numbers, not the index
         int rowIndex = row - 1;
         int colIndex = col - 1;
-        System.out.println(" opening :" + row + " " + col);
+        System.out.println(" opening: " + row + " " + col);
         grid[rowIndex][colIndex].setOpen(true);
         numsitesopen++;
         if (row == 1) {
@@ -84,15 +83,15 @@ public class Percolation {
             rootQ.incrementSize(rootP.getSize());
             rootP.setfull(true);
             rootQ.setfull(true);
-            rootP.setConnectedToOpenBottom(rootQ.getConnectedToOpenBottom());
-            rootP.setConnectedToOpenTop(rootQ.getConnectedToOpenTop());
+            rootP.setConnectedToOpenBottom(true);
+            rootP.setConnectedToOpenTop(true);
         } else {
             rootP.incrementSize(rootQ.getSize());
             rootQ.incrementSize(rootP.getSize());
             rootP.setfull(true);
             rootQ.setfull(true);
-            rootP.setConnectedToOpenBottom(rootQ.getConnectedToOpenBottom());
-            rootP.setConnectedToOpenTop(rootQ.getConnectedToOpenTop());
+            rootP.setConnectedToOpenBottom(true);
+            rootP.setConnectedToOpenTop(true);
         }
     }
 
@@ -110,12 +109,12 @@ public class Percolation {
     public boolean percolates() {
         for (int i = 0; i < grid.length; i++) {
             System.out.println("i: " + i);
-                if(!grid[i][0].getOpen()){
-                    return false;
+            if (!grid[i][0].getOpen()) {
+                return false;
             }
-    } 
-    return true;
-}
+        }
+        return true;
+    }
     // test client 
     public static void main(String[] args) {
 
