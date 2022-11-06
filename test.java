@@ -1,13 +1,15 @@
+//Give a code fragment that removes the last node in a link list whose first node is first.
+
 public class test
 {
     public static void main(String[] args)
     {
-        char myChar = 'a';
-        change(myChar);
-        System.out.println(myChar);
+        Node n = first;
+        while (n.next.next != null)
+        {
+            n = n.next;
+        }
+        n.next = null;
     }
-    public static void change(char charParam)
-    {
-        charParam = 'z';
-    }
+   
 }
