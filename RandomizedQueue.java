@@ -13,6 +13,33 @@ public class RandomizedQueue < Item > implements Iterable < Item > {
         array = new int[1];
     }
 
+    private class RandomizedQueueIterator implements Iterator < Item > {
+        private int i = 0;
+        private int[] array;
+
+        public RandomizedQueueIterator() {
+            array = new int[size];
+            for (int j = 0; j < size; j++) {
+                array[j] = j;
+            }
+
+        }
+
+        public boolean hasNext() {
+            return i < size;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        public Item next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return items[array[i++]];
+        }
+    }
     // is the randomized queue empty?
     public boolean isEmpty() {
         if(size == 0) {
@@ -56,7 +83,8 @@ public class RandomizedQueue < Item > implements Iterable < Item > {
     // return a random item (but do not remove it)
     public Item sample(int i) {
         int r = i + (int) (Math.random() * (size - i));
-        items[r];
+        Item item = items[r];
+        return item;
     }
 
     public void shuffle(Item[] array) {
@@ -81,7 +109,7 @@ public class RandomizedQueue < Item > implements Iterable < Item > {
 
     // return an independent iterator over items in random order
     public Iterator < Item > iterator() {
-
+        return new  RandomizedQueueIterator();
     }
 
     // unit testing (required)
