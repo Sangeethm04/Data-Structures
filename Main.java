@@ -1,12 +1,14 @@
+
 public class Main {
     public static void main(String[] args) {
-   RandomizedQueue<String> rq = new RandomizedQueue<String>();
+      RandomizedQueue <String> rq = new RandomizedQueue <String>();
+
   
-      rq.enqueue("Mary");
-      rq.enqueue("had");
-      rq.enqueue("a");
-      rq.enqueue("little");
-      rq.enqueue("lamb");
+      rq.enqueue("1");
+      rq.enqueue("2");
+      rq.enqueue("3");
+      rq.enqueue("4");
+      rq.enqueue("5");
   
       for (String s: rq) {
         if (s != null)
