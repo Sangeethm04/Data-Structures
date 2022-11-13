@@ -1,47 +1,72 @@
 package Circular;
-import java.util.Random;
-import java.util.*;
-
 import java.util.Iterator;
 
-public class PowerRankings < Item > implements Iterable < Item >{
+public class PowerRankings < Item > implements Iterable < Item > {
+    private Node first;
+    private Node last;
+    private int size;
 
     private class Node {
         Item item;
-        Node next;
+        Node nextNode;
     }
 
-    @Override
-    public Iterator<Item> iterator() {
-        // TODO Auto-generated method stub
-        return new PowerRankingsIterator();
+    // construct an empty deque
+    public PowerRankings() {
+        first = null;
+        size = 0;
     }
 
-    private class PowerRankingsIterator implements Iterator < Item > {
+    // return an iterator over items in order from front to back
+    public Iterator < Item > iterator() {
+        return new ListIterator();
+    }
 
+    private class ListIterator implements Iterator < Item > {
+        private Node current = first;
 
-
-        @SuppressWarnings("unchecked")
-        public PowerRankingsIterator() {
-          
-        }
 
         public boolean hasNext() {
-        }
-
-        public void remove() {
-            throw new UnsupportedOperationException();
+            return current != null;
         }
 
         public Item next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            return items[i++];
+            Item item = current.item;
+            current = current.nextNode;
+            return item;
+        }
+
+        public void remove() {
+            
         }
     }
 
-    
+    // is the deque empty?
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-    
+    // return the number of items on the deque
+    public int size() {
+        return size;
+    }
+
+    // add the item to the front
+    public void addNode(Item item) {
+        Node oldfirst = first;
+        first = new Node();
+        last.nextNode = first;
+        first.item = item;
+        first.nextNode = oldfirst;
+    }
+
+
+    // remove and return the item from the front
+    public Item removeFirst() {
+        Item item = first.item;
+        first = first.nextNode;
+        return item;    
+    }
+
+
 }
