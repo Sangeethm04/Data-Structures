@@ -1,5 +1,6 @@
 package Circular;
 import java.util.Iterator;
+import java.util.Random;
 
 public class PowerRankings < Item > implements Iterable < Item > {
     private Node first;
@@ -23,6 +24,17 @@ public class PowerRankings < Item > implements Iterable < Item > {
     }
 
     private class ListIterator implements Iterator < Item > {
+        private Random r = new Random();
+        private Node current = first;
+        int iteratredNodes = 0;
+        ListIterator() {
+            if (size() > 0);
+            int position = r.nextInt(size());
+            System.out.println(position);
+            for (int j = 0; j <= position; j++) {
+                current = current.next;
+            }
+        }
         private Node current = first;
 
 
@@ -37,7 +49,7 @@ public class PowerRankings < Item > implements Iterable < Item > {
         }
 
         public void remove() {
-            
+
         }
     }
 
@@ -65,7 +77,7 @@ public class PowerRankings < Item > implements Iterable < Item > {
     public Item removeFirst() {
         Item item = first.item;
         first = first.nextNode;
-        return item;    
+        return item;
     }
 
 
