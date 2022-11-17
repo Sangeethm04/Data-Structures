@@ -26,10 +26,12 @@ public class SymbolTable < Key, Value > implements Iterable < Key> {
         N++;
     }
 
-    public void get(Key key) {
-        if(key == null)  {
-
-        }
+    public Value get(Key key) {
+        Node temp = first;
+      while(!temp.key.equals(key)) {
+        temp = temp.next;
+      }
+      return temp.value;
     }
 
     public void delete(Key key) {

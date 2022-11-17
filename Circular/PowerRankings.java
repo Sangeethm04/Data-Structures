@@ -17,6 +17,7 @@ public class PowerRankings < Item > implements Iterable < Item > {
         first = null;
         size = 0;
     }
+    
 
     // return an iterator over items in order from front to back
     public Iterator < Item > iterator() {
