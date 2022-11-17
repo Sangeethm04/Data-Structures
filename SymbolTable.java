@@ -1,11 +1,12 @@
 import java.util.Iterator;
 
-public class SymbolTable < Key, Value > implements Iterable < Key> {
+public class SymbolTable < Key, Value > implements Iterable < Key > {
     private Node first;
     private int N;
 
     public SymbolTable() {
-
+        first = null;
+        N = 0;
     }
 
     private class Node {
@@ -15,46 +16,41 @@ public class SymbolTable < Key, Value > implements Iterable < Key> {
     }
 
 
-    public void put(String key, Double value) {
-        for (Node x = first; x != null; x = x.next) {
-            if (key.equals(x.key)) {
-                x.value = value;
-                return;
-            }
-        }
-        first = new Node(key, value, first);
-        N++;
+    public void put(Key key, Value val) {
+        
     }
 
     public Value get(Key key) {
         Node temp = first;
-      while(!temp.key.equals(key)) {
-        temp = temp.next;
-      }
-      return temp.value;
+        while (!temp.key.equals(key)) {
+            temp = temp.next;
+        }
+        return temp.value;
     }
 
     public void delete(Key key) {
-
+        put(key, null);
     }
 
     public boolean contains(Key key) {
-
+        return get(key) != null;
     }
 
     public boolean isEmpty() {
-
+        return N == 0;
     }
 
     public int size() {
-
+        return N;
     }
 
     @Override
-    public Iterator<Key> iterator() {
+    public Iterator < Key > iterator() {
         // TODO Auto-generated method stub
         return null;
     }
+
+
 
 
 

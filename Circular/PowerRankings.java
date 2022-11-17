@@ -1,6 +1,9 @@
 package Circular;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.*;
+
+//Create a generic circular linked list class that inserts nodes in a random position.
 
 public class PowerRankings < Item > implements Iterable < Item > {
     private Node first;
@@ -9,12 +12,13 @@ public class PowerRankings < Item > implements Iterable < Item > {
 
     private class Node {
         Item item;
-        Node nextNode;
+        Node next;
     }
 
     // construct an empty deque
     public PowerRankings() {
         first = null;
+        last = null;
         size = 0;
     }
     
@@ -25,19 +29,20 @@ public class PowerRankings < Item > implements Iterable < Item > {
     }
 
     private class ListIterator implements Iterator < Item > {
-        private Random r = new Random();
         private Node current = first;
-        int iteratredNodes = 0;
-        ListIterator() {
-            if (size() > 0);
-            int position = r.nextInt(size());
-            System.out.println(position);
-            for (int j = 0; j <= position; j++) {
-                current = current.next;
-            }
-        }
-        private Node current = first;
+        private Random rand = new Random();
 
+        public ListIterator() {
+            if(size() > 1) {
+                int random = rand.nextInt(size);
+                for(int i = 0; i < random; i++) {
+                    current = current.next;
+                }
+                current.item = current.next.item;
+                current.next = current.next.next;
+            }
+            System.out.println("hello there");
+        }
 
         public boolean hasNext() {
             return current != null;
@@ -45,12 +50,12 @@ public class PowerRankings < Item > implements Iterable < Item > {
 
         public Item next() {
             Item item = current.item;
-            current = current.nextNode;
+            current = current.next;
             return item;
         }
 
         public void remove() {
-
+            throw new UnsupportedOperationException("remove called");
         }
     }
 
@@ -63,23 +68,34 @@ public class PowerRankings < Item > implements Iterable < Item > {
     public int size() {
         return size;
     }
-
+    
     // add the item to the front
     public void addNode(Item item) {
-        Node oldfirst = first;
-        first = new Node();
-        last.nextNode = first;
-        first.item = item;
-        first.nextNode = oldfirst;
+        if(isEmpty()) {
+            first = new Node();
+            first.item = item;
+            first.next = first;
+            last = first;
+        } else {
+            Node oldFirst = first;
+            first = new Node();
+            first.item = item;
+            first.next = oldFirst;
+            last.next = first;
+        }
+        size++;
     }
 
 
     // remove and return the item from the front
     public Item removeFirst() {
         Item item = first.item;
-        first = first.nextNode;
+        first = first.next;
+        size--;
         return item;
     }
+
+
 
 
 }
