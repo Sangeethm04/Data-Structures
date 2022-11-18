@@ -2,11 +2,11 @@ import java.util.Iterator;
 
 public class SymbolTable < Key, Value > implements Iterable < Key > {
     private Node first;
-    private int N;
+    private int size;
 
     public SymbolTable() {
         first = null;
-        N = 0;
+        size = 0;
     }
 
     private class Node {
@@ -17,7 +17,16 @@ public class SymbolTable < Key, Value > implements Iterable < Key > {
 
 
     public void put(Key key, Value val) {
-        
+        if (key == null) throw new IllegalArgumentException("first argument to put() is null");
+        if (val == null) {
+            delete(key);
+            return;
+        }
+        first = new Node();
+        first.key = key;
+        first.value = val;
+        first.next = first;
+        size++;
     }
 
     public Value get(Key key) {
@@ -37,11 +46,11 @@ public class SymbolTable < Key, Value > implements Iterable < Key > {
     }
 
     public boolean isEmpty() {
-        return N == 0;
+        return size == 0;
     }
 
     public int size() {
-        return N;
+        return size;
     }
 
     @Override
