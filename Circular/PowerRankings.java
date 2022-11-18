@@ -21,7 +21,7 @@ public class PowerRankings < Item > implements Iterable < Item > {
         last = null;
         size = 0;
     }
-    
+
 
     // return an iterator over items in order from front to back
     public Iterator < Item > iterator() {
@@ -30,27 +30,31 @@ public class PowerRankings < Item > implements Iterable < Item > {
 
     private class ListIterator implements Iterator < Item > {
         private Node current = first;
+        int count = 0;
         private Random rand = new Random();
 
         public ListIterator() {
-            if(size() > 1) {
+            if (size() > 0) {
                 int random = rand.nextInt(size);
-                for(int i = 0; i < random; i++) {
+                for (int i = 0; i < random; i++) {
                     current = current.next;
                 }
-                current.item = current.next.item;
-                current.next = current.next.next;
             }
             System.out.println("hello there");
         }
 
         public boolean hasNext() {
-            return current != null;
+            if (count < size()) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         public Item next() {
             Item item = current.item;
             current = current.next;
+            count++;
             return item;
         }
 
@@ -68,22 +72,28 @@ public class PowerRankings < Item > implements Iterable < Item > {
     public int size() {
         return size;
     }
-    
-    // add the item to the front
+
     public void addNode(Item item) {
-        if(isEmpty()) {
+        Random rand = new Random();
+        Node current = first;
+        if (isEmpty()) {
             first = new Node();
             first.item = item;
             first.next = first;
             last = first;
         } else {
-            Node oldFirst = first;
-            first = new Node();
-            first.item = item;
-            first.next = oldFirst;
-            last.next = first;
+            int random = rand.nextInt(size);
+            for (int i = 0; i < random; i++) {
+                current = current.next;
+            }
+            Node oldNext = current.next;
+            current.next = new Node();
+            current.next.item = item;
+            current.next.next = oldNext; 
+            System.out.println(current.next.item + "hello");
         }
         size++;
+       
     }
 
 
@@ -94,8 +104,4 @@ public class PowerRankings < Item > implements Iterable < Item > {
         size--;
         return item;
     }
-
-
-
-
 }

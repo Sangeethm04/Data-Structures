@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.*;
 
 public class SymbolTable < Key, Value > implements Iterable < Key > {
     private Node first;
@@ -15,6 +16,39 @@ public class SymbolTable < Key, Value > implements Iterable < Key > {
         Node next;
     }
 
+    private class SymbolTableIterator implements Iterator < Key > {
+
+        int current = 0;
+        Node currentNode;
+
+        public SymbolTableIterator() {
+            currentNode = first;
+
+        }
+
+        public Key next() {
+            Node original = currentNode;
+            currentNode = original.next;
+            current++;
+            return original.key;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException("Remove called");
+        }
+
+
+        public boolean hasNext() {
+            if (current < size()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+    }
+
 
     public void put(Key key, Value val) {
         if (key == null) throw new IllegalArgumentException("first argument to put() is null");
@@ -22,10 +56,18 @@ public class SymbolTable < Key, Value > implements Iterable < Key > {
             delete(key);
             return;
         }
-        first = new Node();
-        first.key = key;
-        first.value = val;
-        first.next = first;
+        if (isEmpty()) {
+            first = new Node();
+            first.key = key;
+            first.value = val;
+            first.next = first;
+        } else {
+            Node oldFirst = first;
+            first = new Node();
+            first.key = key;
+            first.value = val;
+            first.next = oldFirst;
+        }
         size++;
     }
 
@@ -55,13 +97,6 @@ public class SymbolTable < Key, Value > implements Iterable < Key > {
 
     @Override
     public Iterator < Key > iterator() {
-        // TODO Auto-generated method stub
-        return null;
+        return new SymbolTableIterator();
     }
-
-
-
-
-
-
 }
