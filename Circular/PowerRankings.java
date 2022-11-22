@@ -1,7 +1,6 @@
 package Circular;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.*;
 
 //Create a generic circular linked list class that inserts nodes in a random position.
 
@@ -90,7 +89,6 @@ public class PowerRankings < Item > implements Iterable < Item > {
             current.next = new Node();
             current.next.item = item;
             current.next.next = oldNext; 
-            System.out.println(current.next.item + "hello");
         }
         size++;
        

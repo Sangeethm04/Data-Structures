@@ -1,6 +1,5 @@
 package SymbolTable;
 import java.util.Iterator;
-import java.util.*;
 
 public class SymbolTable < Key, Value > implements Iterable < Key > {
     private Node first;
