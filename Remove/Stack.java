@@ -1,5 +1,4 @@
 
-package Remove;
 import java.util.Iterator;
 
 //create an iterator for the linked list
