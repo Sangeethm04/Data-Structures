@@ -13,32 +13,48 @@ public class WorldCupTeam implements Comparable < WorldCupTeam > {
 
     @Override
     public int compareTo(WorldCupTeam o) {
-        {
-            if (o.wins < wins) {
+        if (this.equals(o)) {
+            return 0;
+        }
+        if (this.wins / (this.wins + this.losses) > o.wins / (o.wins + o.losses)) {
+            return 1;
+        } else if (this.wins / (this.wins + this.losses) < o.wins / (o.wins + o.losses)) {
+            return -1;
+        } else {
+            if (this.country.compareTo(o.country) > 0) {
                 return 1;
-            } else if (o.wins > wins) {
-                return -1;
             } else {
-                return 0;
+                return -1;
             }
         }
+            
     }
 
     public String toString() {
-        return ("Team " + country + "has " + wins + " wins and " + losses + " losses");
+        return ("Team " + country + " has " + wins + " wins and " + losses + " losses");
+    }
+
+    public boolean equals(WorldCupTeam i, WorldCupTeam j) {
+        if (i.country.equals(j.country)) {
+            return true;
+        }
+        return false;
     }
 
     public static WorldCupTeam play(WorldCupTeam i, WorldCupTeam j) {
-        if (i.country.equals(j)) {
-            int num = (int) Math.random() * 2;
-            if (num == 0) {
-                i.wins++;
-                return i;
-            } else {
-                j.wins++;
-                return j;
-            }
+        if (i.equals(j)) {
+            return i;
         }
-        return null;
+        Random rand = new Random();
+        int random = rand.nextInt(2);
+        if (random == 0) {
+            i.wins++;
+            j.losses++;
+        } else {
+            i.losses++;
+            j.wins++;
+        }
+        return i;
     }
+
 }

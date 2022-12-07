@@ -1,6 +1,8 @@
+import java.util.*;
+
 class Main {
     public static void main(String[] args) {
-        WorldCupTeam[] q = new WorldCupTeam[4];
+        WorldCupTeam[] q = new WorldCupTeam[5];
         q[0] = new WorldCupTeam("Brazil", 0, 0);
         q[1] = new WorldCupTeam("Germany", 0, 0);
         q[2] = new WorldCupTeam("Argentina", 0, 0);
@@ -15,7 +17,11 @@ class Main {
             }
         }
 
-        System.out.println();
+        Arrays.sort(q);
+
+        for(int i = 0; i < 5; i++) {
+            System.out.println(q[i]);
+        }
 
     }
 }
