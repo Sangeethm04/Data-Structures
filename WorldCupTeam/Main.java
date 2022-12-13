@@ -16,12 +16,10 @@ class Main {
                 }
             }
         }
-
         Arrays.sort(q);
-
-        for(int i = 0; i < 5; i++) {
-            System.out.println(q[i]);
-        }
-
+        for (WorldCupTeam team : q) {
+            System.out.println(team);
+          }
     }
+
 }
