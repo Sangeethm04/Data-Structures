@@ -6,6 +6,7 @@ class Main {
         tree.put(1, "apple");
         tree.put(2, "banana");
         tree.put(3, "citrus");
-        
+
+        System.out.println(tree);
     }
 }
