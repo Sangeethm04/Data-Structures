@@ -99,6 +99,7 @@ public class BST < Key extends Comparable < Key > , Value > {
         else
             x.val = val;
         x.count = size(x.left) + size(x.right) + 1;
+        
         return x;
 
     }
