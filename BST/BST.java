@@ -2,23 +2,21 @@ package BST;
 
 public class BST < Key extends Comparable < Key > , Value > {
     private Node root;
+    protected int height;
+
 
     private class Node {
         private Key key;
         private Value val;
         private Node left, right;
-        private int count;
+        private int n;
 
-        public Node(Key key, Value val, int n) {
+        public Node(Key key, Value val, int n, int height) {
             this.key = key;
             this.val = val;
-            this.count = n;
+            this.n = n;
         }
 
-    }
-
-    public int height() {
-        return height(root);
     }
 
     public int height(Node root) {
@@ -27,33 +25,17 @@ public class BST < Key extends Comparable < Key > , Value > {
         }
 
         int leftRoot = height(root.left);
-        System.out.println("left: " + leftRoot + " key: " + root.key + " value: " + root.val);
         int rightRoot = height(root.right);
-        System.out.println("right: "+rightRoot + " key: " + root.key + " value: " + root.val);
 
         if (leftRoot > rightRoot) {
-            return (leftRoot + 1);
+            return leftRoot;
         } else {
-            return (rightRoot + 1);
+            return rightRoot;
         }
     }
-
-    public int height2() {
-        return height2(root);
-    }
-
-    public int height2(Node root) {
-        if (root == null) {
-            return 0;
-        }
-
-       
-
-    }
-
 
     public String toString() {
-        return "Key: " + this.root.key.toString() + " Value: " + this.root.val.toString() + " Height: " + this.height();
+        return this.root.key.toString() + this.root.val.toString() + this.root.n + this.height;
     }
 
     public int size() {
@@ -64,7 +46,7 @@ public class BST < Key extends Comparable < Key > , Value > {
         if (x == null)
             return 0;
         else
-            return x.count;
+            return x.n;
     }
 
     public Value get(Key key) {
@@ -84,21 +66,41 @@ public class BST < Key extends Comparable < Key > , Value > {
     }
 
     public void put(Key key, Value val) {
-        root = put(root, key, val);
+        root = put(root, key, val, 0);
     }
 
-    private Node put(Node x, Key key, Value val) {
+    private Node put(Node x, Key key, Value val, int height) {
+        height += 1;
+        System.out.println(height);
+        if (x == null) {
+            this.height = height;
+        }
         if (x == null)
-            return new Node(key, val, 1);
+            return new Node(key, val, 1, height);
         int cmp = key.compareTo(x.key);
         if (cmp < 0)
-            x.left = put(x.left, key, val);
+            x.left = put(x.left, key, val, height);
         else if (cmp > 0)
-            x.right = put(x.right, key, val);
+            x.right = put(x.right, key, val, height);
         else
             x.val = val;
-        x.count = size(x.left) + size(x.right) + 1;
+        x.n = size(x.left) + size(x.right) + 1;
         return x;
+
+    }
+
+    public static void main(String[] args) {
+        BST < Integer, String > tree = new BST < > ();
+        tree.put(2, "apple");
+        tree.put(1, "banana");
+        tree.put(6, "citrus");
+        tree.put(3, "citrus");
+        tree.put(8, "citrus");
+        tree.put(4, "citrus");
+
+        System.out.println("Size: " + tree.size());
+        //print out the height of the tree
+        System.out.println("Height: " + tree.height);
 
     }
 
