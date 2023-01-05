@@ -71,7 +71,6 @@ public class BST < Key extends Comparable < Key > , Value > {
 
     private Node put(Node x, Key key, Value val, int height) {
         height += 1;
-        System.out.println(height);
         if (x == null) {
             this.height = height;
         }
