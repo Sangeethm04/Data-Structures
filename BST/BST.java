@@ -88,6 +88,17 @@ public class BST < Key extends Comparable < Key > , Value > {
 
     }
 
+    public Key min() {
+        return min(root);
+    }
+
+    private Key min(Node root) {
+        if (root.left == null) {
+            return root.key;
+        }
+        return min(root.left);
+    }
+
     public static void main(String[] args) {
         BST < Integer, String > tree = new BST < > ();
         tree.put(2, "apple");
