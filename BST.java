@@ -1,4 +1,4 @@
-public class BST<Key extends Comparable<Key>, Value> {
+public class BST < Key extends Comparable < Key > , Value > {
   private Node root;
   int height;
 
@@ -49,6 +49,7 @@ public class BST<Key extends Comparable<Key>, Value> {
   public Value get(Key key) {
     return get(root, key);
   }
+
 
   private Value get(Node x, Key key) {
     if (x == null)
@@ -158,14 +159,26 @@ public class BST<Key extends Comparable<Key>, Value> {
   }
 
   public Key select(int i) {
-    if (i == null) {
+    if (i == 0) {
       throw new IllegalArgumentException("no working");
     }
+
+    return select(root, i);
+  }
 
   private Key select(Node rt, int i) {
     if (rt == null) {
       return null;
     }
+    int t = size(rt.left);
+    if (t > i) {
+      return select(rt.left, i);
+    } else if (t < i) {
+      return select(rt.right, i - t - 1);
+    } else {
+      return rt.key;
+    }
+
   }
 
 }
