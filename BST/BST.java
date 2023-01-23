@@ -142,23 +142,27 @@ public class BST < Key extends Comparable < Key > , Value > {
         return n.key;
     }
 
-    private Node floor(Node rt, Key k) {
-        if (rt == null)
-            return null;
-        int cmp = k.compareTo(rt.key);
-        if (cmp == 0)
-            return rt;
-        if (cmp < 0) {
-            Node c = floor(rt.left, k);
-            if (c == null)
-                return rt;
-            else
-                return c;
-        } else {
-            return floor(rt.right, k);
-        }
 
+    public Node floor(Node rt, Key k) {
+        if (rt == null) {
+            return null;
+        }
+        int cmp = k.compareTo(rt.key);
+        if (cmp == 0) {
+            return rt;
+        } else if (cmp < 0) {
+            return floor(rt.left, k);
+        } else if (cmp > 0) {
+            Node f = floor(rt.right, k);
+            if (f == null) {
+                return rt;
+            } else {
+                return f;
+            }
+        }
+        return null;
     }
+
 
     public Key select(int i) {
         Node n = select(root, i);
@@ -181,12 +185,30 @@ public class BST < Key extends Comparable < Key > , Value > {
         return null;
     }
 
+    public int rank(Key k) {
+        return rank(root, k);
+    }
+
+    private int rank(Node rt, Key k) {
+        if (rt == null)
+            return 0;
+        int cmp = k.compareTo(rt.key);
+        if (cmp == 0) {
+            return size(rt.left);
+        } else if (cmp < 0) {
+            return rank(rt.left, k);
+        } else {
+            return 1 + size(rt.left) + rank(rt.right, k);
+        }
+    }
+
+
     public void printInorder() {
         printInOrder(root);
     }
 
     private void printInOrder(Node rt) {
-        if(rt==null) {
+        if (rt == null) {
             return;
         }
         printInOrder(rt.left);
@@ -200,11 +222,11 @@ public class BST < Key extends Comparable < Key > , Value > {
     }
 
     private void printPreorder(Node rt) {
-        if (rt==null) {
+        if (rt == null) {
             return;
         }
 
-        
+
     }
 
 }
