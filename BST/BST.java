@@ -212,7 +212,7 @@ public class BST < Key extends Comparable < Key > , Value > {
             return;
         }
         printInOrder(rt.left);
-        System.out.println(rt.key);
+        System.out.print(rt.key + " ");
         printInOrder(rt.right);
 
     }
@@ -225,6 +225,24 @@ public class BST < Key extends Comparable < Key > , Value > {
         if (rt == null) {
             return;
         }
+
+        System.out.print(rt.key + " ");
+        printPreorder(rt.left);
+        printPreorder(rt.right);
+    }
+
+    public void printPostOrder() {
+        printPostOrder(root);
+    }
+
+    private void printPostOrder(Node rt) {
+        if (rt == null) {
+            return;
+        }
+        printPostOrder(rt.left);
+        printPostOrder(rt.right);
+        System.out.print(rt.key + " ");
+
 
 
     }
