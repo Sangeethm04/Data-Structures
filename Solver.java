@@ -68,20 +68,17 @@ public class Solver {
 
     // min number of moves to solve initial board; -1 if unsolvable
     public int moves() {
-        if (!isSolvable()) return -1;
-        return 0;
+        if (!isSolvable()) return -1
+        return ;
     }
 
     // sequence of boards in a shortest solution; null if unsolvable using searchNode
     public Iterable < Board > solution() {
         if (!isSolvable()) return null;
+        Stack<Board> boards = new Stack<Board>();
+        SearchNode node = new SearchNode(initial, 0, null);
+        SearchNode lastNode = node;
             
     }
-
-    // test client (see below) 
-    public static void main(String[] args) {
-
-    }
-
 
 }
